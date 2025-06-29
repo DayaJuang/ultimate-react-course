@@ -145,10 +145,50 @@ function getBook(id) {
 
 // Destructuring
 const book = getBook(1);
-const { title, author, genres } = book;
+const { title, author, genres, pages } = book;
 const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
 
 const newGenres = [...genres, "new genre"];
 const updatedBook = { ...book, pages: 1210, movePublished: "2001-01-01" };
 
-console.log(updatedBook);
+const summary = `${title} is a book`;
+
+const isOverThousand = pages > 1000 ? "true" : "false";
+
+const getYear = (str) => str.split("-")[0];
+
+// Array - Map
+const books = getBooks();
+
+const titles = books.map((book) => book.title);
+const essentialData = books.map((book) => ({
+  title: book.title,
+  author: book.author,
+}));
+
+// Array - Filter
+const longBooks = books.filter((book) => book.pages > 500);
+
+// Array - Reduce
+const totalPages = books.reduce((acc, book) => acc + book.pages, 0);
+
+// Array - sort
+const sortedByPages = books
+  .slice()
+  .sort((a, b) => a.pages - b.pages)
+  .map((book) => book.title);
+
+// Async Process
+// fetch("https://jsonplaceholder.typicode.com/todos/1")
+//   .then((response) => response.json())
+//   .then((json) => console.log(json));
+
+const getTodos = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+  const data = await res.json();
+  console.log(data);
+
+  return data;
+};
+
+const todos = getTodos();
