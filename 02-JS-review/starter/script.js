@@ -146,7 +146,9 @@ function getBook(id) {
 // Destructuring
 const book = getBook(1);
 const { title, author, genres } = book;
-const [primaryGenre, secondaryGenre] = genres;
+const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
 
-console.log(title, author, genres);
-console.log(primaryGenre, secondaryGenre);
+const newGenres = [...genres, "new genre"];
+const updatedBook = { ...book, pages: 1210, movePublished: "2001-01-01" };
+
+console.log(updatedBook);
